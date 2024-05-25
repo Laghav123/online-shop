@@ -1,0 +1,28 @@
+These are some general notes that I need to take while creating project
+
+- What if we Discovery Server goes down in between??
+If so, nothing will happen. Because our client create a local copy of all services registered with
+Discovery Server, and when it is down the client will use its local copy to send request.
+
+- What is Inventory service goes down??
+If all instances of inventory service goes down, then the services making request to it will not
+get any response and will give error
+
+- What if Inventory Service comes up again? Will it be able to register with Discovery Server?
+Yes, all services connected to Discovery Server send heartbeats every 30 seconds
+
+- What is API Gateway? Why do we need them?
+API Gateway is a service which acts between client and other microservices. This isolates
+microservices from end user.
+When working on local machine we have constant connection links with port values. But this is not
+the case when application is deployed on web. There will be multiple instances os a service and
+each instance will be running on different port. API Gateway comes handy in this situation
+to route requests based on headers.
+
+- Other perks of API Gateway
+Its basic need is routing requests based on header. But it has other benefits as:
+a) Can act as Authentication Server
+b) Provide Security
+c) Can act as Load Balancer
+d) SSL Termination (no https beyond API Gateway)
+
